@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Important Question 💖</title>
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: #ffe6f0;
+      overflow: hidden;
+    }
+
+    h1 {
+      color: #b30059;
+      margin-bottom: 40px;
+    }
+
+    .buttons {
+      position: relative;
+    }
+
+    button {
+      font-size: 1.4em;
+      padding: 15px 30px;
+      margin: 10px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    #yes {
+      background-color: #ff4d88;
+      color: white;
+    }
+
+    #no {
+      background-color: #cccccc;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Dear Mansi, will you be my Valentine? 💘</h1>
+
+  <div class="buttons">
+    <button id="yes" onclick="sayYes()">Yes 💖</button>
+    <button id="no">No 🙄</button>
+  </div>
+
+  <script>
+    const noButton = document.getElementById("no");
+
+    noButton.addEventListener("mouseover", () => {
+      const x = Math.random() * (window.innerWidth - noButton.offsetWidth);
+      const y = Math.random() * (window.innerHeight - noButton.offsetHeight);
+
+      noButton.style.left = x + "px";
+      noButton.style.top = y + "px";
+    });
+
+    function sayYes() {
+      alert("YAY!!! 💕 I knew it 😘");
+    }
+  </script>
+
+</body>
+</html>
