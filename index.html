@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
   <title>Important Question 💖</title>
   <style>
     body {
@@ -10,64 +9,81 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      font-family: Arial, sans-serif;
       background: #ffe6f0;
+      font-family: Arial, sans-serif;
       overflow: hidden;
     }
 
-    h1 {
-      color: #b30059;
-      margin-bottom: 40px;
-    }
+    h1 { color: #b30059; }
 
     .buttons {
       position: relative;
+      width: 400px;
+      height: 200px;
+      margin-top: 30px;
     }
 
     button {
       font-size: 1.4em;
       padding: 15px 30px;
-      margin: 10px;
       border: none;
       border-radius: 12px;
       cursor: pointer;
     }
 
     #yes {
-      background-color: #ff4d88;
+      background: #ff4d88;
       color: white;
     }
 
     #no {
-      background-color: #cccccc;
       position: absolute;
+      background: #ccc;
     }
   </style>
 </head>
 <body>
 
-  <h1>Dear Mansi, will you be my Valentine? 💘</h1>
+<h1>Dear Mansi, will you be my Valentine? 💘</h1>
 
-  <div class="buttons">
-    <button id="yes" onclick="sayYes()">Yes 💖</button>
-    <button id="no">No 🙄</button>
-  </div>
+<div class="buttons" id="area">
+  <button id="yes" onclick="goNext()">Yes 💖</button>
+  <button id="no">No 🙄</button>
+</div>
 
-  <script>
-    const noButton = document.getElementById("no");
+<script>
+  function goNext() {
+    window.location.href = "sure.html";
+  }
 
-    noButton.addEventListener("mouseover", () => {
-      const x = Math.random() * (window.innerWidth - noButton.offsetWidth);
-      const y = Math.random() * (window.innerHeight - noButton.offsetHeight);
+  const noBtn = document.getElementById("no");
+  const area = document.getElementById("area");
 
-      noButton.style.left = x + "px";
-      noButton.style.top = y + "px";
-    });
+  let x = 200, y = 100;
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
 
-    function sayYes() {
-      alert("YAY!!! 💕 I knew it 😘");
+  document.addEventListener("mousemove", (e) => {
+    const a = area.getBoundingClientRect();
+    const b = noBtn.getBoundingClientRect();
+
+    const dx = (b.left + b.width/2) - e.clientX;
+    const dy = (b.top + b.height/2) - e.clientY;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+
+    if (dist < 100) {
+      const angle = Math.atan2(dy, dx);
+      x += Math.cos(angle) * 60;
+      y += Math.sin(angle) * 60;
+
+      x = Math.max(0, Math.min(a.width - b.width, x));
+      y = Math.max(0, Math.min(a.height - b.height, y));
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
     }
-  </script>
+  });
+</script>
 
 </body>
 </html>
