@@ -1,4 +1,89 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Important Question 💖</title>
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #ffe6f0;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    h1 { color: #b30059; }
+
+    .buttons {
+      position: relative;
+      width: 400px;
+      height: 200px;
+      margin-top: 30px;
+    }
+
+    button {
+      font-size: 1.4em;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    #yes {
+      background: #ff4d88;
+      color: white;
+    }
+
+    #no {
+      position: absolute;
+      background: #ccc;
+    }
+  </style>
+</head>
+<body>
 <h1>Are you sure? 😏</h1>
 <img src="images/photo1.jpg" width="300">
+
 <button onclick="location.href='really-sure.html'">Yes 💕</button>
 <button id="no">No 🙄</button>
+
+<script>
+  function goNext() {
+    window.location.href = "sure.html";
+  }
+
+  const noBtn = document.getElementById("no");
+  const area = document.getElementById("area");
+
+  let x = 200, y = 100;
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+
+  document.addEventListener("mousemove", (e) => {
+    const a = area.getBoundingClientRect();
+    const b = noBtn.getBoundingClientRect();
+
+    const dx = (b.left + b.width/2) - e.clientX;
+    const dy = (b.top + b.height/2) - e.clientY;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+
+    if (dist < 100) {
+      const angle = Math.atan2(dy, dx);
+      x += Math.cos(angle) * 60;
+      y += Math.sin(angle) * 60;
+
+      x = Math.max(0, Math.min(a.width - b.width, x));
+      y = Math.max(0, Math.min(a.height - b.height, y));
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    }
+  });
+</script>
+
+</body>
+</html>
